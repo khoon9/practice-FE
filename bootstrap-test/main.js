@@ -1,7 +1,5 @@
-const exampleInputEl = document.querySelector('#exampleInputEmail1')
-const modalEl = document.querySelector('#exampleModal')
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle'
 
-// shown.bs.modal 이벤트 발생시 exampleInputEl.focus() 수행
-modalEl.addEventListener('shown.bs.modal', function(){
-    exampleInputEl.focus()
-})
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
