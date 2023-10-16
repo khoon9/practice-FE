@@ -10,7 +10,12 @@ const ExpenseItem = (props) => {
         <span className="amount">{props.expense.amount} 원</span>
       </div>
       <div>
-        <button className="edit-btn">
+        <button
+          className="edit-btn"
+          onClick={() => {
+            props.handleEdit(props.expense.id);
+          }}
+        >
           <MdEdit />
         </button>
         <button

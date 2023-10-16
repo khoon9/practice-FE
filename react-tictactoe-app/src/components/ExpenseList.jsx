@@ -12,14 +12,17 @@ const ExpenseList = (props) => {
               expense={expense}
               key={expense.id}
               handleDelete={props.handleDelete}
+              handleEdit={props.handleEdit}
             />
           );
         })}
       </ul>
-      <button className="btn">
-        목록 지우기
-        <MdDelete className="btn-icon" />
-      </button>
+      {props.expenses.length > 0 ? (
+        <button className="btn" onClick={props.clearItems}>
+          목록 지우기
+          <MdDelete className="btn-icon" />
+        </button>
+      ) : null}
     </div>
   );
 };
