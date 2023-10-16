@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./App.css";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
@@ -84,9 +84,10 @@ const App = () => {
     setEdit(true);
     setId(id);
   };
-  const clearItems = () => {
+
+  const clearItems = useCallback(() => {
     setExpenses([]);
-  };
+  }, []);
 
   return (
     <main className="main-container">

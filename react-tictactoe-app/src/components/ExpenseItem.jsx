@@ -2,18 +2,18 @@ import React from "react";
 import "./ExpenseItem.css";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-const ExpenseItem = (props) => {
+const ExpenseItem = React.memo(({ expense, handleEdit, handleDelete }) => {
   return (
     <li className="item">
       <div className="info">
-        <span className="expense">{props.expense.charge}</span>
-        <span className="amount">{props.expense.amount} 원</span>
+        <span className="expense">{expense.charge}</span>
+        <span className="amount">{expense.amount} 원</span>
       </div>
       <div>
         <button
           className="edit-btn"
           onClick={() => {
-            props.handleEdit(props.expense.id);
+            handleEdit(expense.id);
           }}
         >
           <MdEdit />
@@ -21,7 +21,7 @@ const ExpenseItem = (props) => {
         <button
           className="clear-btn"
           onClick={() => {
-            props.handleDelete(props.expense.id);
+            handleDelete(expense.id);
           }}
         >
           <MdDelete />
@@ -29,6 +29,6 @@ const ExpenseItem = (props) => {
       </div>
     </li>
   );
-};
+});
 
 export default ExpenseItem;
