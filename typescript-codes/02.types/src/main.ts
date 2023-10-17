@@ -46,7 +46,7 @@ tuple2 = ["a", 1];
 tuple2.push("b");
 console.log(tuple2);
 
-// sny
+// any
 let any: any = "abc";
 any = 1;
 any = [];
