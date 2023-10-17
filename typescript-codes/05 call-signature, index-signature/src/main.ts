@@ -47,4 +47,4 @@ interface Names {
   [item: number]: string;
 }
 
-const userNames = ["John", "kim", "Joe"];
+const userNames: Names = ["John", "kim", "Joe"];

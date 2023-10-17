@@ -1,33 +1,12 @@
 "use strict";
-const bear1 = {
-    name: "honey bear",
-    honey: true,
+// // 호출 시그니처
+// interface getLikeNumber {
+//   (like: number): number;
+// }
+const post1 = {
+    id: 1,
+    title: "post 1",
 };
-const bear2 = {
-    name: "honey bear",
-    honey: true,
-};
-const bear3 = {
-    name: "honey bear",
-    honey: true,
-};
-class Article01 {
-    constructor() {
-        this.category = "";
-        this.content = "";
-    }
-}
-class Article02 {
-    constructor() {
-        this.category = "";
-        this.content = "";
-    }
-}
-const bear4 = {
-    name: "honey bear",
-    honey: true,
-};
-const bear5 = {
-    name: "honey bear",
-    honey: true,
-};
+post1["description"] = "description 1";
+post1["pages"] = 300;
+const userNames = ["John", "kim", "Joe"];
