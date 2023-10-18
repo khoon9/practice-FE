@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import axios from "axios";
 import PokeCard from "./components/PokeCard";
-
+import Test from "./components/Test";
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const url = "https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0";
