@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 const PokeCard = ({ name, url }) => {
   const [pokemon, setPokemon] = useState();
@@ -48,12 +49,13 @@ const PokeCard = ({ name, url }) => {
             <div
               className={` box-border relative flex w-full h-[5.5rem] basis justify-center items-center`}
             >
-              <img
+              <Loading url={img} alt={name} />
+              {/* <img
                 src={img}
                 alt={name}
                 width="100%"
                 className={` object-contain h-full`}
-              />
+              /> */}
             </div>
           </div>
           <div

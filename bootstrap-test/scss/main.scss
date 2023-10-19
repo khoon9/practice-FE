@@ -1,3 +1,33 @@
+
+// Required
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+
+
+// Required
+@import "../node_modules/bootstrap/scss/variables-dark";
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/root";
+
+
+// 적용할 커스터마이징. 덮어씌우기로 동작
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  yellowgreen,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+);
+
+// Optional Bootstrap components here
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type"; 
+
+// 위에서 덮어씌우기 과정을 완료하고, bootstrap.scss 을 마지막으로 import 하여 커스터마이징 적용
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 $color: orange;

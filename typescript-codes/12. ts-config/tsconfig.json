@@ -14,6 +14,9 @@
     "strict": true,
     // "strictNullChecks": false
     "baseUrl": "./",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
     "isolatedModules": true,
     "removeComments": true,
     // 먼저 js 로 개발을 하고 ts 로 변경을 할 때 파일 하나씩 작업을 이루는 상황에서 테스트를 용이하게 하기 위해
@@ -27,5 +30,5 @@
     "declaration": true
   },
   //
-  "include": ["./src/**/*.ts"]
+  "include": ["./src/**/*", "tests/**/*"]
 }
