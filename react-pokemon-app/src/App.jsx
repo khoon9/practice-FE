@@ -6,6 +6,7 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
+  const [searchInput, setSearchInput] = useState("");
 
   // API 호출
   // 컴포넌트 마운트 -> useState 초기화 -> return 렌더링 -> useEffect 순서
@@ -25,10 +26,54 @@ function App() {
     }
   };
 
+  const handleSearchInput = async (e) => {
+    setSearchInput(e.target.value);
+    if (e.target.value.length > 0) {
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${e.target.value}`
+        );
+        const pokemonData = {
+          url: `http://pokeapi.co/api/v2/pokemon/${response.data.id}`,
+          name: searchInput,
+        };
+        setPokemons([pokemonData]);
+      } catch (error) {
+        setPokemons([]);
+        console.log(error);
+      }
+    } else {
+      fetchPokeData(true);
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <article className="pt-6">
       <header className="flex flex-col gap-2 w-full px-4 z-50">
-        {/* 입력 폼 위치 */}
+        <div className="relative z-50">
+          <form
+            onSubmit={handleSearchSubmit}
+            className="relative flex items-center justify-center w-[20.5rem] h-6 rounded-lg m-auto"
+          >
+            <input
+              type="text"
+              value={searchInput}
+              onChange={handleSearchInput}
+              className="w-[20.5rem] h-6 bg-[hsl(214,13%,47%)] text-xs px-2 py-1 rounded-l-lg text-gray-300 text-center"
+              placeholder=""
+            />
+            <button
+              type="submit"
+              className=" w-[2.5rem] h-6 bg-slate-900 text-slate-300 px-2 py-1 rounded-r-lg text-xs"
+            >
+              검색
+            </button>
+          </form>
+        </div>
       </header>
       <section className="pt-6 flex flex-col justify-center items-center overflow-auto z-0">
         <div className="flex flex-row flex-wrap gap-[16px] items-center justify-center px-2 max-w-4xl">
