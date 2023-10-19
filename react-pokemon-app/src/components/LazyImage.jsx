@@ -13,7 +13,7 @@ const Loading = ({ url, alt }) => {
     <>
       {isLoading && (
         <div className="absolute h-full z-10 w-full flex items-center justify-center">
-          ...Loading
+          <></>
         </div>
       )}
       <img

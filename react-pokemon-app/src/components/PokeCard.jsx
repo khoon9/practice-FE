@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Loading from "./Loading";
+import LazyImage from "./LazyImage";
 
 const PokeCard = ({ name, url }) => {
   const [pokemon, setPokemon] = useState();
@@ -49,7 +49,7 @@ const PokeCard = ({ name, url }) => {
             <div
               className={` box-border relative flex w-full h-[5.5rem] basis justify-center items-center`}
             >
-              <Loading url={img} alt={name} />
+              <LazyImage url={img} alt={name} />
               {/* <img
                 src={img}
                 alt={name}
