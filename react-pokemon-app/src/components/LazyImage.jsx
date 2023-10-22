@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { Loading } from "../assets/Loading";
 
-const Loading = ({ url, alt }) => {
+const LazyImage = ({ url, alt }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [opacity, setOpacity] = useState("opacity-0");
 
@@ -13,7 +14,7 @@ const Loading = ({ url, alt }) => {
     <>
       {isLoading && (
         <div className="absolute h-full z-10 w-full flex items-center justify-center">
-          <></>
+          <Loading className="w-12 h-12 z-50 animate-spin text-slate-300" />
         </div>
       )}
       <img
@@ -29,4 +30,4 @@ const Loading = ({ url, alt }) => {
   );
 };
 
-export default Loading;
+export default LazyImage;
