@@ -9,6 +9,7 @@ import { Balance } from "../../assets/Balance";
 import { Vector } from "../../assets/Vector";
 import Type from "../../components/Type";
 import BaseStat from "../../components/BaseStat";
+import DamageRelations from "../../components/DamageRelations";
 
 const DetailPage = () => {
   const [pokemon, setPokemon] = useState();
@@ -17,7 +18,6 @@ const DetailPage = () => {
   const params = useParams();
   const pokemonId = params.id;
   const baseUrl = "https://pokeapi.co/api/v2/pokemon/";
-  console.log(params.id);
 
   useEffect(() => {
     fetchPokemonData();
@@ -41,7 +41,6 @@ const DetailPage = () => {
             return type.data.damage_relations;
           })
         );
-        console.log("D", DamageRelations);
 
         const formattedPokemonData = {
           id,
@@ -149,11 +148,10 @@ const DetailPage = () => {
               #{pokemon.id.toString().padStart(3, "00")}
             </div>
           </div>
-
-          <div className="relative h-auto max-w-[15.5rem] z-20 mt-6 -mb-16">
+          <div className="flex justify-center items-center relative h-auto z-20 mt-6 -mb-16">
             <img
               src={img}
-              width="100%"
+              width="70%"
               height="auto"
               loading="lazy"
               alt="pokemon.name"
@@ -222,6 +220,7 @@ const DetailPage = () => {
             <div className="w-10/12">
               <h2 className={`text-base text-center font-semibold ${text}`}>
                 데미지 관계
+                <DamageRelations damages={pokemon.DamageRelations} />
               </h2>
               데미지
             </div>
