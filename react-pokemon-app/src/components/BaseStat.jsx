@@ -11,7 +11,7 @@ const BaseStat = ({ valueStat, nameStat, type }) => {
   }, []);
   return (
     <tr className="w-full text-white">
-      <td className="sm:px-5 text-[0.25rem]">{nameStat}</td>
+      <td className="sm:px-5 text-[1rem]">{nameStat}</td>
       <td className="px-2 sm:px-3">{valueStat}</td>
       <td>
         <div

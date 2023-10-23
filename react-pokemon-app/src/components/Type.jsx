@@ -9,12 +9,12 @@ const Type = ({ type, damageValue }) => {
         className={`h-[1.5rem] py-1 px-3 rounded-2xl ${bg} font-bold text-zinc-800 text-[0.6rem] leading-[0.8rem] capitalize flex gap-1 justify-center items-center`}
       >
         {type}
+        {damageValue && (
+          <span className="bg-zinc-200/40 p-[0.125rem] rounded">
+            {damageValue}
+          </span>
+        )}
       </span>
-      {damageValue && (
-        <span className="bg-zinc-200/40 p-[0.125rem] rounded">
-          {damageValue}
-        </span>
-      )}
     </div>
   );
 };

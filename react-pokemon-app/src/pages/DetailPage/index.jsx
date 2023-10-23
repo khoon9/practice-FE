@@ -203,7 +203,7 @@ const DetailPage = () => {
 
           <h2 className={`text-base font-semibold ${text}`}>기본 능력치</h2>
           <div className={`w-full ${text}`}>
-            <table>
+            <table className="w-full">
               <tbody>
                 {pokemon.stats.map((stat) => (
                   <BaseStat
@@ -219,10 +219,8 @@ const DetailPage = () => {
           {pokemon.DamageRelations && (
             <div className="w-10/12">
               <h2 className={`text-base text-center font-semibold ${text}`}>
-                데미지 관계
                 <DamageRelations damages={pokemon.DamageRelations} />
               </h2>
-              데미지
             </div>
           )}
         </section>
