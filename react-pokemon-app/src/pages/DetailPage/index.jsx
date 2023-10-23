@@ -119,7 +119,7 @@ const DetailPage = () => {
       >
         {pokemon.previous && (
           <Link
-            className=" absolute top-[40%] -translate-y-1/2 z-50 left-1"
+            className=" absolute top-[40%] z-50 left-1 -translate-y-1/2"
             to={`/pokemon/${pokemon.previous}`}
           >
             <LessThan className="w-5 h-8 p-1" />
@@ -128,7 +128,7 @@ const DetailPage = () => {
 
         {pokemon.next && (
           <Link
-            className=" absolute top-[40%] -translate-y-1/2 z-50 right-1"
+            className=" absolute top-[40%] z-50 right-1 -translate-y-1/2 "
             to={`/pokemon/${pokemon.next}`}
           >
             <GreaterThan className="w-5 h-8 p-1" />
@@ -155,7 +155,7 @@ const DetailPage = () => {
               height="auto"
               loading="lazy"
               alt="pokemon.name"
-              className="object-contain h-full"
+              className="object- h-full"
             />
           </div>
         </section>
