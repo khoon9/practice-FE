@@ -10,10 +10,12 @@ import { Vector } from "../../assets/Vector";
 import Type from "../../components/Type";
 import BaseStat from "../../components/BaseStat";
 import DamageRelations from "../../components/DamageRelations";
+import DamageModal from "../../components/DamageModal";
 
 const DetailPage = () => {
   const [pokemon, setPokemon] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const params = useParams();
   const pokemonId = params.id;
@@ -154,8 +156,9 @@ const DetailPage = () => {
               width="70%"
               height="auto"
               loading="lazy"
+              onClick={() => setIsModalOpen(true)}
               alt="pokemon.name"
-              className="object- h-full"
+              className="object- h-full cursor-pointer"
             />
           </div>
         </section>
@@ -216,15 +219,14 @@ const DetailPage = () => {
               </tbody>
             </table>
           </div>
-          {pokemon.DamageRelations && (
-            <div className="w-10/12">
-              <h2 className={`text-base text-center font-semibold ${text}`}>
-                <DamageRelations damages={pokemon.DamageRelations} />
-              </h2>
-            </div>
-          )}
         </section>
       </div>
+      {isModalOpen && (
+        <DamageModal
+          damages={pokemon.DamageRelations}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </article>
   );
 };
