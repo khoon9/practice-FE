@@ -29,6 +29,16 @@ const DamageRelations = ({ damages }) => {
     }, {});
   };
 
+  const filterForUniqueValues = (valueForFiltering, damageValue) => {
+    return valueForFiltering.reduce((acc, currentValue) => {
+      const { url, name } = currentValue;
+      const filterACC = acc.filter((i) => i.name !== name);
+      return filterACC.length === acc.length
+        ? [...acc, currentValue]
+        : [...filterACC, { damageValue: damageValue, name, url }];
+    }, []);
+  };
+
   const joinDamageRelations = (props) => {
     return {
       //   to: joinObject(props, "to"),
@@ -83,8 +93,8 @@ const DamageRelations = ({ damages }) => {
       }, {});
   };
   return (
-    <div className="flex gap-3 flex-col">
-      {damagePokemonForm ? (
+    <div className="flex flex-col">
+      {damagePokemonForm && (
         <>
           {Object.entries(damagePokemonForm).map(([key, value]) => {
             const ValueOfKeyName = {
@@ -112,8 +122,6 @@ const DamageRelations = ({ damages }) => {
             );
           })}
         </>
-      ) : (
-        <div></div>
       )}
     </div>
   );

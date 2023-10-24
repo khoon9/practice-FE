@@ -52,7 +52,7 @@ const AutoComplete = ({ allPokemons, setDisplayedPokemons }) => {
         {checkEqualName(searchInput).length > 0 && (
           <div className=" w-full flex bottom-0 h-0 flex-col absolute justify-center items-center translate-y-2">
             <div className="w-0 h-0 bottom-0 border-x-transparent border-x-8 border-b-[8px] border-gray-700 -translate-y-1/2"></div>
-            <ul className="w-40 max-h-[134px] py-1 bg-gray-700 rounded-lg absolute top-0 overflow-auto scrollbar-none">
+            <ul className="w-40 max-h-[134px] py-1 bg-gray-300 rounded-lg absolute top-0 overflow-auto scrollbar-none">
               {checkEqualName(searchInput).map((pokemon, index) => {
                 return (
                   <li key={`button-${index}`}>
