@@ -181,15 +181,15 @@ const DetailPage = () => {
               #{pokemon.id.toString().padStart(3, "00")}
             </div>
           </div>
-          <div className="flex max-w-[15rem] justify-center items-center relative h-auto z-20 mt-6 -mb-16">
+          <div className="flex max-w-[20rem] justify-center items-end relative h-full z-20 mt-6 -mb-16">
             <img
               src={img}
-              width="100%"
-              height="auto"
+              width="auto"
+              height="100%"
               loading="lazy"
               onClick={() => setIsModalOpen(true)}
               alt="pokemon.name"
-              className="object- h-full cursor-pointer"
+              className="object-contain h-auto cursor-pointer"
             />
           </div>
         </section>
