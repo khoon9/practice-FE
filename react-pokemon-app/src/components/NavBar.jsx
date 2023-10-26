@@ -1,20 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 import app from "../firebase";
+
+const initialUserData = localStorage.getItem("userData")
+  ? JSON.parse(localStorage.getItem("userData"))
+  : {};
 
 const NavBar = () => {
   const [show, handleShow] = useState(false);
   const { pathname } = useLocation();
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(initialUserData);
   const handleAuth = () => {
     // 비동기 프로그램이기에 .then 을 작성
-    signInWithPopup(auth, provider).then((result) => {
-      console.log(result);
-    });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        setUserData(result.user);
+        localStorage.setItem("userData", JSON.stringify(result.user));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  useEffect(() => {
+    // 유저의 sign-in state 가 변할 때 이 호출을 불러온다
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (!user) {
+        navigate("/login");
+      } else if (user && pathname === "/login") {
+        navigate("/");
+      }
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, [pathname]);
+
   const listener = () => {
     if (window.scrollY > 50) {
       handleShow(true);
@@ -31,6 +63,18 @@ const NavBar = () => {
       window.removeEventListener("scroll", listener);
     };
   }, []);
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setUserData({});
+        localStorage.removeItem("userData");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+
   return (
     <NavWrapper show={show}>
       <Logo>
@@ -43,11 +87,54 @@ const NavBar = () => {
       {pathname === "/login" ? (
         <Login onClick={handleAuth}>Login</Login>
       ) : (
-        <></>
+        <SignOut>
+          <UserImg src={userData.photoURL} alt="user photo" />
+          <Dropdown>
+            <span onClick={handleLogout}>Sign out</span>
+          </Dropdown>
+        </SignOut>
       )}
     </NavWrapper>
   );
 };
+
+const UserImg = styled.img`
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+`;
+
+const Dropdown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0px;
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  width: 100px;
+  opacity: 0;
+  color: white;
+`;
+
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    ${Dropdown} {
+      opacity: 1;
+      transition-duration: 1s;
+    }
+  }
+`;
 
 const Login = styled.a`
   cursor: pointer;
