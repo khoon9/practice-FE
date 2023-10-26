@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import app from "../firebase";
 
 const NavBar = () => {
-  const [show, setShow] = useState(false);
-  console.log(show);
+  const [show, handleShow] = useState(false);
+  const { pathname } = useLocation();
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const handleAuth = () => {
+    // 비동기 프로그램이기에 .then 을 작성
+    signInWithPopup(auth, provider).then((result) => {
+      console.log(result);
+    });
+  };
   const listener = () => {
-    if (window.scrollY >= 50) {
-      setShow(true);
+    if (window.scrollY > 50) {
+      handleShow(true);
     } else {
-      setShow(false);
+      handleShow(false);
     }
   };
 
@@ -29,9 +40,30 @@ const NavBar = () => {
           onClick={() => (window.location.href = "/")}
         ></Image>
       </Logo>
+      {pathname === "/login" ? (
+        <Login onClick={handleAuth}>Login</Login>
+      ) : (
+        <></>
+      )}
     </NavWrapper>
   );
 };
+
+const Login = styled.a`
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid #f9f9f9;
+  border-radius: 4px;
+  transition: all 0.2s ease 0s;
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
+  }
+`;
 
 const Image = styled.img`
   cursor: pointer;
