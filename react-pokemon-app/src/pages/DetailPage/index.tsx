@@ -114,6 +114,7 @@ const DetailPage = () => {
           sprites: formatPokemonSprites(sprites),
           description: await getPokemonDescription(id),
         };
+        console.log(")@)@)@)@)@)", formattedPokemonData.DamageRelations);
         setPokemon(formattedPokemonData);
         setIsLoading(false);
       }
