@@ -2,15 +2,23 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import LazyImage from "./LazyImage";
 import { Link } from "react-router-dom";
+import { PokemonNameAndUrl } from "../types/PokemonData";
+import { PokemonDetail } from "../types/PokemonDetail";
 
-const PokeCard = ({ name, url }) => {
-  const [pokemon, setPokemon] = useState();
+interface PokeData {
+  id: number;
+  type: string;
+  name: string;
+}
+
+const PokeCard = ({ url, name }: PokemonNameAndUrl) => {
+  const [pokemon, setPokemon] = useState<PokeData>();
 
   useEffect(() => {
     fetchPokemon(url);
   }, [url]);
 
-  const fetchPokemon = (url) => {
+  const fetchPokemon = (url: string) => {
     try {
       axios.get(url).then((res) => {
         setPokemon(formatPokemonData(res.data));
@@ -23,9 +31,9 @@ const PokeCard = ({ name, url }) => {
   const border = `border-${pokemon?.type}`;
   const text = `text-${pokemon?.type}`;
   const img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon?.id}.png`;
-  const formatPokemonData = (params) => {
+  const formatPokemonData = (params: PokemonDetail) => {
     const { id, name, types } = params;
-    const pokemonData = {
+    const pokemonData: PokeData = {
       id: id,
       name: name,
       type: types[0].type.name,

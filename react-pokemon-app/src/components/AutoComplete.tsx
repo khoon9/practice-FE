@@ -1,20 +1,31 @@
 import React, { useState } from "react";
+import { PokemonNameAndUrl } from "../types/PokemonData";
 
-const AutoComplete = ({ allPokemons, setDisplayedPokemons }) => {
+interface AutoCompleteProps {
+  allPokemons: PokemonNameAndUrl[];
+  setDisplayedPokemons: React.Dispatch<
+    React.SetStateAction<PokemonNameAndUrl[]>
+  >;
+}
+
+const AutoComplete = ({
+  allPokemons,
+  setDisplayedPokemons,
+}: AutoCompleteProps) => {
   const [searchInput, setSearchInput] = useState("");
 
   // 0. e 에서 text 뽑아서 text 처리 및 검색으로 보내, 반환 배열 받기
   //    allPokemons 에서 text 기반 검색
   //    text 는 소문자로 변험 후 includes 을 사용해 해당되는 모두를 반환
   // 1. 찾아낸 pokemon 들로 이뤄진 목록을 setDisplayedPokemons 에 반영
-  const filterNames = (Input) => {
+  const filterNames = (Input: string) => {
     const value = Input.toLowerCase();
     return value
       ? allPokemons.filter((pokemon) => pokemon?.name.includes(value))
       : [];
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     let text = searchInput.trim();
@@ -23,7 +34,7 @@ const AutoComplete = ({ allPokemons, setDisplayedPokemons }) => {
   };
 
   // 일치하는 포켓몬이름이 존재할 경우  빈 배열 보내기
-  const checkEqualName = (input) => {
+  const checkEqualName = (input: string) => {
     const filteredArray = filterNames(input);
     return filteredArray[0]?.name === input ? [] : filteredArray;
   };
